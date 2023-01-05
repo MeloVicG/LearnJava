@@ -3,7 +3,6 @@ import business.Company;
 public class Person {
     //      classes         creating an instance of that class
     private String firstName = "Victor";
-
     //    primitves
     // when you create object for a primitive there is no variables
     // when we create variables for primitive there is no object
