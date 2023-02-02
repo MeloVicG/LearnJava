@@ -10,7 +10,7 @@ public class TranscriptParser {
                 State ID: 1234560
                 
                 Cumulative GPA (Weighted) 3.82
-                Cumulative GPA (Unweighted) 3.46
+                Cumulative GPA (Unweighted) 3.46 
                 """;
         String regex = "Student\\sNumber:\\s(?<studentNum>\\d{10}.*)";
         Pattern pat = Pattern.compile(regex, Pattern.DOTALL);
