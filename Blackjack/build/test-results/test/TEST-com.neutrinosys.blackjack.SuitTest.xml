@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.neutrinosys.blackjack.SuitTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-02-27T08:05:36" hostname="DESKTOP-GN7CDPN" time="0.013">
+  <properties/>
+  <testcase name="hearPrintsHeart()" classname="com.neutrinosys.blackjack.SuitTest" time="0.013"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
