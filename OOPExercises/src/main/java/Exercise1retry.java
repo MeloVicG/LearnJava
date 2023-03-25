@@ -41,7 +41,5 @@ public class Exercise1retry {
             System.out.println(dayOfMeal[i]);
         }
 
-        //exercise 3
-
     }
 }
