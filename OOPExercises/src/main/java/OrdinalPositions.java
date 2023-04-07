@@ -18,6 +18,7 @@ public enum OrdinalPositions {
     }
 
     public int getOrdinal() {
+
         return ordinal;
     }
 }

@@ -17,6 +17,7 @@ public class ChessBoard {
     public ChessPiece getPieceAtCoords(String chessCoords){
         Coordinates coords = new Coordinates(chessCoords);
         return internalBoard[coords.getX()][coords.getY()];
+
     }
 
 
