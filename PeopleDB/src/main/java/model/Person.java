@@ -1,9 +1,11 @@
 package model;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
 public class Person {
-    private long id;
+    private long id; // dont want to have id here for equals method because of db property?
     private String firstName;
     private String lastName;
     private ZonedDateTime dob;
@@ -54,5 +56,19 @@ public class Person {
                 ", lastName='" + lastName + '\'' +
                 ", dob=" + dob +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id == person.id && firstName.equals(person.firstName) && lastName.equals(person.lastName) &&
+                dob.withZoneSameInstant(ZoneId.of("+0")).equals(person.dob);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, dob);
     }
 }

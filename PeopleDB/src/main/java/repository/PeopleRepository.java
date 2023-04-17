@@ -5,6 +5,7 @@ import model.Person;
 
 import java.sql.*;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class PeopleRepository { // lives in data access layer
     private static final String SAVE_PERSON_SQL = "INSER INTO PEOPLE (FIRST_NAME, LAST_NAME, DOB) VALUES(?, ?, ?)";
@@ -15,7 +16,6 @@ public class PeopleRepository { // lives in data access layer
     }
 
     public Person save(Person person){
-
 //                                   throws SQLException{  ---> not this because java application is written in layers
         try{
             PreparedStatement ps = connection.prepareStatement(SAVE_PERSON_SQL, Statement.RETURN_GENERATED_KEYS);
@@ -40,4 +40,24 @@ public class PeopleRepository { // lives in data access layer
 
         return person;
     }
+    public Person findById(Long id){
+        Person person = new Person("", "", null);
+        person.setId(id);
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT ID, FIRST_NAME, LAST_NAME, DOB FROM PEOPLE WHERE ID=?");
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();// results we get from query with rows and columns
+            while(rs.next()){
+                long personId = rs.getLong("ID");
+                String first_name = rs.getString("FIRST_NAME");
+                String lastName = rs.getString("LAST_NAME");
+                ZonedDateTime dob = ZonedDateTime.of(rs.getTimestamp("DOB").toLocalDateTime(), ZoneId.of("+0"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return person;
+
+    }
+
 }

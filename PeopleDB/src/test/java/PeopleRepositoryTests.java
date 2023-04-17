@@ -51,6 +51,13 @@ public class PeopleRepositoryTests {
         Person savedPerson2 = repo.save(bobby);
 //        assertThat(savedPerson.getId()).isGreaterThan(0); // the dependecy assertJ is not allowing me to import properly a
         assertThat(savedPerson1.getId()).isGreaterThan().isNotEqualTo(savedPerson2);
-
     }
+
+    @Test
+    public void canFindPersonById(){
+        Person savedPerson = repo.save(new Person("test", "Jackson", ZonedDateTime.now()));
+        Person foundPerson = repo.findById(savedPerson.getId());
+        assertThat(foundPerson).isEqualTo(savedPerson);
+    }
+
 }
