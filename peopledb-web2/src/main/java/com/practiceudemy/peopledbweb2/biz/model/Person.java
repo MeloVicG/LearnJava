@@ -1,4 +1,4 @@
-package com.practiceudemy.peopledbweb.biz.model;
+package com.practiceudemy.peopledbweb2.biz.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@Data // this is lombok. generates - getters setters constructors hashcode 2string etc
+@Data // generates - getters setters constructors hashcode 2string etc
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -29,4 +29,3 @@ public class Person {
         return DateTimeFormatter.ofPattern("MMMM dd, yyyy").format(dob);
     }
 }
-

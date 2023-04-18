@@ -16,7 +16,7 @@ public class PersonDataLoader implements ApplicationRunner {
 
     // alt + insert = Generate
     // spring will see this constructor requires a person repository to be passed in and spring will check its own internal registry bean
-    // - hey I want you to give me an instance of repository
+    // - hey I want you to give me an instance of repository1
     public PersonDataLoader(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
