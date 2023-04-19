@@ -24,11 +24,11 @@ public class PersonDataLoader implements ApplicationRunner {
     @Override   //this is what i get to do after spring starts
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("Running stuff here");
-        if (personRepository.count() == 0) {
-            List<Person> people = List.of(new Person(null, "brock", "purdy", LocalDate.of(1950, 1, 1), new BigDecimal("50000")),
-                                          new Person(null, "sasuke", "uchiha", LocalDate.of(1950, 1, 1), new BigDecimal("60000")),
-                                          new Person(null, "naruto", "uzumaki", LocalDate.of(1950, 1, 1), new BigDecimal("70000")),
-                                          new Person(null, "victor", "kayi", LocalDate.of(1950, 1, 1), new BigDecimal("80000"))
+        if (personRepository.count() == 0) {        //id will be generated automatically
+            List<Person> people = List.of(new Person(null, "brock", "purdy", LocalDate.of(1950, 1, 1), "fake@nothing.com", new BigDecimal("50000")),
+                                          new Person(null, "sasuke", "uchiha", LocalDate.of(1950, 1, 1), "fake@nothing.com",new BigDecimal("60000")),
+                                          new Person(null, "naruto", "uzumaki", LocalDate.of(1950, 1, 1), "fake@nothing.com",new BigDecimal("70000")),
+                                          new Person(null, "victor", "kayi", LocalDate.of(1950, 1, 1), "fake@nothing.com",new BigDecimal("80000"))
             );
             personRepository.saveAll(people);
         }

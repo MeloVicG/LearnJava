@@ -6,6 +6,7 @@ import com.practiceudemy.peopledbweb.data.PersonRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller //here is an interesting class to register and manage for web stuff
@@ -26,9 +27,22 @@ public class PeopleController {
         return personRepository.findAll();
     }
 
+    @ModelAttribute //if you dont specify a name for thjs model. spring will tate return data type for the model
+    public Person getPerson(){
+        Person person = new Person();
+        person.setFirstName("Jokester");
+        return person;
+    }
+
     @GetMapping //relates to CRUD - if request comes /people and its a get request. let this method handle request
     public String showPeoplePage(){  // Model model - dont need this in parameter anymore because line 26
         return "people"; //this handles people.html in templates (spring MVC)
+    }
+    @PostMapping
+    public String savePerson(Person person){
+        System.out.println(person);
+        personRepository.save(person);
+        return "redirect:people";
     }
 }
 
