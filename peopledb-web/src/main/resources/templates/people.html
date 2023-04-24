@@ -14,48 +14,72 @@
 <!--        >My Junk Person</li>-->
 <!--    </ol>-->
 
-    <div class="col-8 mx-auto">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">First Name</th>
-                <th scope="col">DOB</th>
-                <th scope="col">Email</th>
-                <th scope="col">Salary</th>
-            </tr>
-            </thead>
+    <div class="col-md-8 col-sm-11 mx-auto my-5">
+        <h2> PEOPLE LIST </h2>
+        <form method="post">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col"> SELECT </th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">DOB</th>
+                    <th scope="col" class="d-sm-none d-md-table-cell">Email</th>
+                    <th scope="col">Salary</th>
+                </tr>
+                </thead>
 
-            <tbody>
-            <tr th:each="person: ${people}">
-                <th scope="row" th:text="${person.id}"></th>
-                <td th:text="${person.lastName}"></td>
-                <td th:text="${person.firstName}"></td>
-                <td th:text="${{person.dob}}"></td> <!-- double curly is converting -->
-                <td th:text="${{person.email}}"></td> <!-- double curly is converting -->
-    <!--            <td th:text="${#dates.format(person.dob, 'MMMM dd, yyyy')}"></td>   WRONG!  -->
-                <td th:text="${{person.salary}}"></td>
-            </tr>
-            <tr th:remove="all">
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
-            </tbody>
-        </table>
+                <tbody>
 
+                    <tr th:if="${#lists.isEmpty(people)}">
+                        <td colspan="6" class="text-center">No Data</td>
+                    </tr>
+
+                    <tr th:each="person: ${people}">
+                        <td><input class="form-check-input" type="checkbox" name="selections" th:value="${person.id}" /></td>
+                        <th scope="row" th:text="${person.id}"></th>
+                        <td th:text="${person.lastName}"></td>
+                        <td th:text="${person.firstName}"></td>
+                        <td th:text="${{person.dob}}"></td> <!-- double curly is converting -->
+                        <td th:text="${person.email}" class="d-sm-none d-md-table-cell"></td> <!-- double curly is converting -->
+            <!--            <td th:text="${#dates.format(person.dob, 'MMMM dd, yyyy')}"></td>   WRONG!  -->
+                        <td th:text="${{person.salary}}"></td>
+
+                    </tr>
+                    <tr th:remove="all">
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2">Larry the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" name="delete" value="true" class="btn btn-danger">Delete</button>
+            <button type="submit" name="edit" value="true" class="btn btn-primary">Edit</button>
+        </form>
+
+        <h2> Person Form </h2>
         <form th:object="${person}" method="post">
             <div class="mb-3" >
                 <label for="firstName" class="form-label">First Name:</label>
-                <input type="text" class="form-control" id="firstName" th:field="*{firstName}" aria-describedby="firstNameHelp">
+                <input type="text"
+                       class="form-control"
+                       id="firstName"
+                       th:field="*{firstName}"
+                       th:errorclass="is-invalid"
+                       aria-describedby="firstNameHelp">
             </div>
+                                                            <!-- adding extra class-->
+            <div id="validationFirstName" class="invalid-feedback" th:error="firstName">
+                Please choose a username.
+            </div>
+
             <div class="mb-3" >
                 <label for="lastName" class="form-label">Last Name:</label>
                 <input type="text" class="form-control" th:field="*{lastName}" id="lastName" aria-describedby="lastNameHelp">
@@ -76,6 +100,8 @@
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
+            <!-- behind the scenes-->
+            <input type="hidden" th:field="*{id}"/>
             <button type="submit" class="btn btn-primary">Save Person</button>
         </form>
 

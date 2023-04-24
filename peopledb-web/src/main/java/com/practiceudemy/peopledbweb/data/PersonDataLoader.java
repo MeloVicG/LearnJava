@@ -3,14 +3,14 @@ package com.practiceudemy.peopledbweb.data;
 import com.practiceudemy.peopledbweb.biz.model.Person;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 //whenever application runs up after spring
-@Component // this is interesting because of @Component, without this it will ignore this class
+// why does @component get rid of table??? find out
+//@Component // this is interesting because of @Component, without this it will ignore this class
 public class PersonDataLoader implements ApplicationRunner {
     private PersonRepository personRepository;
 

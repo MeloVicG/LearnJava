@@ -3,11 +3,14 @@ package com.practiceudemy.peopledbweb.web.controller;
 
 import com.practiceudemy.peopledbweb.biz.model.Person;
 import com.practiceudemy.peopledbweb.data.PersonRepository;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller //here is an interesting class to register and manage for web stuff
 @RequestMapping("/people")
@@ -38,11 +41,35 @@ public class PeopleController {
     public String showPeoplePage(){  // Model model - dont need this in parameter anymore because line 26
         return "people"; //this handles people.html in templates (spring MVC)
     }
+
     @PostMapping
-    public String savePerson(Person person){
+    public String savePerson(@Valid Person person, Errors errors){ // @valid - the Person object
         System.out.println(person);
-        personRepository.save(person);
+        if(!errors.hasErrors()){
+            personRepository.save(person);
+            return "redirect:people";
+        }
+        return "people"; //returns the /people
+    }
+
+    @PostMapping(params = "delete=true")
+//    public String deletePeople(@RequestParam(required = false) List<Long> selections){
+    public String deletePeople(@RequestParam Optional<List<Long>> selections){
+        System.out.println(selections);
+        if (selections.isPresent()) {
+            personRepository.deleteAllById(selections.get());
+        }
         return "redirect:people";
+        //redirect will cause model to be detach binding
+    }
+    @PostMapping(params = "edit=true")
+    public String editPerson(@RequestParam Optional<List<Long>> selections, Model model){
+        System.out.println(selections);
+        if (selections.isPresent()) {
+            Optional<Person> person = personRepository.findById(selections.get().get(0));
+            model.addAttribute("person", person); //why does this prefill form???
+        }
+        return "people";
     }
 }
 

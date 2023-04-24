@@ -3,6 +3,8 @@ package com.practiceudemy.peopledbweb.biz.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +21,17 @@ public class Person {
     @Id
     @GeneratedValue
     private Long id;
+
+    @NotEmpty(message = "First name can not be empty")
     private String firstName;
+
+    @NotEmpty(message = "Last name can not be empty")
     private String lastName;
+
+    @Past(message = " Dob must be past dates")
     private LocalDate dob;
+
+//    @Email()
     private String email;
     private BigDecimal salary;
 
