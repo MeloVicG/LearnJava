@@ -1,10 +1,10 @@
-package com.practiceudemy.peopledbweb2;
+package todolistpracticej17.todolistapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PeopledbWeb2ApplicationTests {
+class TodolistAppApplicationTests {
 
 	@Test
 	void contextLoads() {

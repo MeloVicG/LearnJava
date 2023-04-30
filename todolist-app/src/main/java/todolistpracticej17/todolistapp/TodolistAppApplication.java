@@ -1,13 +1,13 @@
-package com.practiceudemy.peopledbweb2;
+package todolistpracticej17.todolistapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PeopledbWeb2Application {
+public class TodolistAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PeopledbWeb2Application.class, args);
+		SpringApplication.run(TodolistAppApplication.class, args);
 	}
 
 }
